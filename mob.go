@@ -358,7 +358,7 @@ func status() {
 	if isMobProgramming() {
 		sayInfo("mob programming in progress")
 
-		say(silentgit("--no-pager", "log", baseBranch+".."+wipBranch, "--pretty=format:%h %cr <%an>", "--abbrev-commit"))
+		//say(silentgit("--no-pager", "log", baseBranch+".."+wipBranch, "--pretty=format:%h %cr <%an>", "--abbrev-commit"))
 	} else {
 		sayInfo("you aren't mob programming right now")
 	}
