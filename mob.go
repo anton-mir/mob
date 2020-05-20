@@ -12,8 +12,8 @@ import (
 
 const versionNumber = "0.0.16-dev"
 
-var wipBranch = "mob-session"                 // override with MOB_WIP_BRANCH environment variable
-var baseBranch = "master"                     // override with MOB_BASE_BRANCH environment variable
+var wipBranch = "work/mob_prodigy"                 // override with MOB_WIP_BRANCH environment variable
+var baseBranch = "work/prodigy"                     // override with MOB_BASE_BRANCH environment variable
 var remoteName = "origin"                     // override with MOB_REMOTE_NAME environment variable
 var wipCommitMessage = "mob next [ci-skip]"   // override with MOB_WIP_COMMIT_MESSAGE environment variable
 var voiceCommand = "say"                      // override with MOB_VOICE_COMMAND environment variable
