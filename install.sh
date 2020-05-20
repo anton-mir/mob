@@ -1,7 +1,7 @@
 #!/bin/sh
 target=/usr/local/bin
 user_arg=$1
-stream_cmd="curl -sL install.mob.sh"
+stream_cmd="curl -sL https://raw.githubusercontent.com/anton-mir/mob/master/install.sh"
 readme="https://mob.sh"
 
 determine_os() {
