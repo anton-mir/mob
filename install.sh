@@ -81,7 +81,7 @@ check_access_rights() {
 
 install_remote_binary() {
   echo "installing latest 'mob' release from GitHub to $target..."
-  url=$(curl -s https://api.github.com/repos/remotemobprogramming/mob/releases/latest |
+  url=$(curl -s https://api.github.com/repos/anton-mir/mob/releases/latest |
     grep "browser_download_url.*mob_.*$(determine_os)_amd64\.tar\.gz" |
     cut -d ":" -f 2,3 |
     tr -d ' \"')
