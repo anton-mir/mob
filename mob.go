@@ -214,6 +214,7 @@ func start(parameter []string) {
 		    git("checkout", baseBranch)
 			git("branch", "-D", wipBranch)
 			git("checkout", wipBranch)
+			//git("push", "--set-upstream", remoteName, wipBranch)
 			git("branch", "--set-upstream-to="+remoteName+"/"+wipBranch, wipBranch)
 		}
 	} else if !hasMobProgrammingBranch() && !hasMobProgrammingBranchOrigin() {
@@ -228,6 +229,7 @@ func start(parameter []string) {
 	} else if !hasMobProgrammingBranch() && hasMobProgrammingBranchOrigin() {
 		sayInfo("joining mob session")
 		git("checkout", wipBranch)
+		//git("push", "--set-upstream", remoteName, wipBranch)
 		git("branch", "--set-upstream-to="+remoteName+"/"+wipBranch, wipBranch)
 	} else {
 		sayInfo("purging local branch and start new " + wipBranch + " branch from " + baseBranch)
@@ -238,8 +240,9 @@ func start(parameter []string) {
 		git("merge", remoteName+"/"+baseBranch, "--ff-only")
 		git("branch", wipBranch)
 		git("checkout", wipBranch)
-		git("branch", "--set-upstream-to="+remoteName+"/"+wipBranch, wipBranch)
-		git("push", "--no-verify")
+		git("push", "--set-upstream", remoteName, wipBranch)
+		//git("branch", "--set-upstream-to="+remoteName+"/"+wipBranch, wipBranch)
+		//git("push", "--no-verify")
 	}
 
 	if mobStartIncludeUncommittedChanges && stashed {
@@ -358,7 +361,7 @@ func status() {
 	if isMobProgramming() {
 		sayInfo("mob programming in progress")
 
-		//say(silentgit("--no-pager", "log", baseBranch+".."+wipBranch, "--pretty=format:%h %cr <%an>", "--abbrev-commit"))
+		say(silentgit("--no-pager", "log", remoteName+"/"+baseBranch+".."+remoteName+"/"+wipBranch, "--pretty=format:%h %cr <%an>", "--abbrev-commit"))
 	} else {
 		sayInfo("you aren't mob programming right now")
 	}
@@ -411,7 +414,7 @@ func showNext() {
 	if debug {
 		sayDebug("determining next person based on previous changes")
 	}
-	changes := strings.TrimSpace(silentgit("--no-pager", "log", baseBranch+".."+wipBranch, "--pretty=format:%an", "--abbrev-commit"))
+	changes := strings.TrimSpace(silentgit("--no-pager", "log", remoteName+"/"+baseBranch+".."+remoteName+"/"+wipBranch, "--pretty=format:%an", "--abbrev-commit"))
 	lines := strings.Split(strings.Replace(changes, "\r\n", "\n", -1), "\n")
 	numberOfLines := len(lines)
 	if debug {
