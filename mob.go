@@ -206,11 +206,12 @@ func start(parameter []string) {
 	}
 
 	git("fetch", "--prune")
-	git("pull", "--ff-only")
+	//git("pull", "--ff-only")
 
 	if hasMobProgrammingBranch() && hasMobProgrammingBranchOrigin() {
 		sayInfo("rejoining mob session")
 		if !isMobProgramming() {
+		    git("checkout", baseBranch)
 			git("branch", "-D", wipBranch)
 			git("checkout", wipBranch)
 			git("branch", "--set-upstream-to="+remoteName+"/"+wipBranch, wipBranch)
@@ -221,14 +222,16 @@ func start(parameter []string) {
 		git("merge", remoteName+"/"+baseBranch, "--ff-only")
 		git("branch", wipBranch)
 		git("checkout", wipBranch)
-		git("branch", "--set-upstream-to="+remoteName+"/"+wipBranch, wipBranch)
-		git("push", "--no-verify")
+		//git("branch", "--set-upstream-to="+remoteName+"/"+wipBranch, wipBranch)
+		//git("push", "--no-verify")
+		git("push", "--set-upstream", remoteName, wipBranch)
 	} else if !hasMobProgrammingBranch() && hasMobProgrammingBranchOrigin() {
 		sayInfo("joining mob session")
 		git("checkout", wipBranch)
 		git("branch", "--set-upstream-to="+remoteName+"/"+wipBranch, wipBranch)
 	} else {
 		sayInfo("purging local branch and start new " + wipBranch + " branch from " + baseBranch)
+		git("checkout", baseBranch)
 		git("branch", "-D", wipBranch) // check if unmerged commits
 
 		git("checkout", baseBranch)
