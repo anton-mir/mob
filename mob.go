@@ -271,7 +271,7 @@ func findLatestMobStash(stashes string) string {
 func startZoomScreenshare() {
 	commandStr := ""
 	if runtime.GOOS == "linux" {
-		commandStr = "(xdotool windowactivate $(xdotool search --name --onlyvisible 'zoom meeting') && xdotool keydown Alt s)"
+		commandStr = "(xdotool windowactivate $(xdotool search --name --onlyvisible 'Zoom') && xdotool keydown Alt s)"
 	} else {
 		commandStr = "(osascript -e 'tell application \"System Events\" to keystroke \"S\" using {shift down, command down}')"
 	}
